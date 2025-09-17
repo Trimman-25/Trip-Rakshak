@@ -1,0 +1,1927 @@
+/* Reset and base styles */
+@import "leaflet/dist/leaflet.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+/* App Container - Full Screen */
+.app-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Background Elements */
+.background-orbs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.orb:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.orb:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.orb:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Status Bar */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px 8px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.status-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-bar-title {
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.status-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+}
+
+.battery-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.signal-bars {
+    display: flex;
+    gap: 1px;
+    align-items: end;
+}
+
+.signal-bar {
+    width: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 1px;
+}
+
+.signal-bar:nth-child(1) { height: 6px; }
+.signal-bar:nth-child(2) { height: 8px; }
+.signal-bar:nth-child(3) { height: 10px; }
+.signal-bar:nth-child(4) { height: 12px; }
+
+.signal-bar-active {
+    background: #4ecdc4 !important;
+}
+
+.network-offline {
+    color: #ff6b6b;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+/* Custom Scrollbar */
+.main-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Home Screen */
+.home-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #1a1a1a;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.hero-icon-container {
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    padding: 16px;
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.user-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-avatar {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: white;
+}
+
+.user-id, .user-validity {
+    font-size: 13px;
+    opacity: 0.9;
+    color: white;
+}
+
+/* City Selector */
+.city-selector-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.city-selector-trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.city-selector-trigger:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.city-selector-text {
+    flex: 1;
+    text-align: left;
+    font-weight: 600;
+}
+
+.city-selector-arrow {
+    transition: transform 0.3s ease;
+}
+
+.city-selector-arrow-up {
+    transform: rotate(180deg);
+}
+
+.city-selector-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.city-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+.city-option:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.city-option-selected {
+    background: rgba(102, 126, 234, 0.2);
+    color: #667eea;
+}
+
+.city-option-content {
+    text-align: left;
+}
+
+.city-option-name {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.city-option-coords {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Location Card */
+.location-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.location-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.location-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.location-text {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.safe-zone-badge {
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.geofence-safe {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    color: white;
+}
+
+.geofence-buffer {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+}
+
+.geofence-caution {
+    background: linear-gradient(135deg, #fb923c, #ea580c);
+    color: white;
+}
+
+.geofence-danger {
+    background: linear-gradient(135deg, #f87171, #dc2626);
+    color: white;
+}
+
+.coordinates-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    text-align: center;
+}
+
+.coordinate-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.coordinate-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Status Grid */
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.status-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-2px);
+}
+
+.status-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.status-card-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.status-indicator-green {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+.status-indicator-red {
+    background: linear-gradient(135deg, #f87171, #dc2626);
+}
+
+.status-indicator-gray {
+    background: linear-gradient(135deg, #d1d5db, #9ca3af);
+}
+
+.status-text {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status-text-green {
+    color: #16a34a;
+}
+
+.status-text-red {
+    color: #dc2626;
+}
+
+.status-text-gray {
+    color: #6b7280;
+}
+
+.status-text-blue {
+    color: #2563eb;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 20px 20px;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 100%;
+}
+
+.tab-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+.tab-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tab-button-inactive {
+    color: #9ca3af;
+}
+
+.tab-button-active-home {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+.tab-button-active-geofencing {
+    color: #16a34a;
+    background: rgba(22, 163, 74, 0.15);
+    transform: translateY(-2px);
+}
+
+.tab-button-active-contacts {
+    color: #ea580c;
+    background: rgba(234, 88, 12, 0.15);
+    transform: translateY(-2px);
+}
+
+.tab-button-active-settings {
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.15);
+    transform: translateY(-2px);
+}
+
+.tab-button-sos {
+    color: #dc2626;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(248, 113, 113, 0.2));
+    animation: pulse 2s infinite;
+    border: 2px solid rgba(220, 38, 38, 0.3);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 380px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    padding: 24px 24px 0;
+}
+
+.modal-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.modal-subtitle {
+    color: #6b7280;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.modal-close-btn {
+    background: rgba(107, 114, 128, 0.1);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: rgba(107, 114, 128, 0.2);
+    transform: scale(1.1);
+}
+
+/* Emergency Types */
+.emergency-types-container {
+    padding: 0 24px 24px;
+}
+
+.emergency-types-instruction {
+    text-align: center;
+    color: #6b7280;
+    font-size: 15px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.emergency-btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.emergency-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.emergency-btn-emoji {
+    font-size: 28px;
+    width: 50px;
+    text-align: center;
+}
+
+.emergency-btn-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.emergency-btn-desc {
+    font-size: 13px;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.emergency-btn-medical {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+.emergency-btn-safety {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: #2563eb;
+    border-color: #93c5fd;
+}
+
+.emergency-btn-lost {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    color: #16a34a;
+    border-color: #86efac;
+}
+
+.emergency-btn-disaster {
+    background: linear-gradient(135deg, #fefce8, #fef3c7);
+    color: #ca8a04;
+    border-color: #fde047;
+}
+
+.emergency-btn-fire {
+    background: linear-gradient(135deg, #fff7ed, #fed7aa);
+    color: #ea580c;
+    border-color: #fdba74;
+}
+
+.emergency-btn-general {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+/* SOS States */
+.sos-countdown-container, .sos-active-container {
+    text-align: center;
+    padding: 24px;
+}
+
+.sos-countdown-circle {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4);
+    animation: pulse 1s infinite;
+}
+
+.sos-countdown-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.cancel-sos-btn {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cancel-sos-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 114, 128, 0.3);
+}
+
+/* Utility Classes */
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+.icon-white { color: white; }
+.icon-blue { color: #3b82f6; }
+.icon-green { color: #10b981; }
+.icon-red { color: #ef4444; }
+.icon-orange { color: #f59e0b; }
+.icon-purple { color: #8b5cf6; }
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .status-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .coordinates-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .hero-title {
+        font-size: 24px;
+    }
+    
+    .tab-container {
+        padding: 0 8px;
+    }
+    
+    .tab-button {
+        min-width: 50px;
+        padding: 10px 12px;
+    }
+    
+    .main-content {
+        padding: 16px;
+        padding-bottom: 90px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-content {
+        padding: 12px;
+        padding-bottom: 85px;
+    }
+    
+    .tab-label {
+        font-size: 10px;
+    }
+    
+    .hero-title {
+        font-size: 22px;
+    }
+}
+/* Geofencing Screen Styles */
+.geofencing-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.geofencing-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.geofencing-title {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.geofencing-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Geofence Status Card */
+.geofence-status-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.geofence-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.geofence-status-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.geofence-status-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #1f2937;
+}
+
+.geofence-status-location {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.geofence-status-badge {
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.geofence-status-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.geofence-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.geofence-detail-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.geofence-detail-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Geofence Zones Card */
+.geofence-zones-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.geofence-zones-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.zone-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.zone-category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.zone-category-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.zone-indicator-safe {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+.zone-indicator-danger {
+    background: linear-gradient(135deg, #f87171, #dc2626);
+}
+
+.zone-category-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.zone-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.zone-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.zone-item:hover {
+    transform: translateY(-1px);
+}
+
+.zone-safe {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(74, 222, 128, 0.1));
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+.zone-danger {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(248, 113, 113, 0.1));
+    border-color: rgba(220, 38, 38, 0.2);
+}
+
+.zone-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.zone-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.zone-details {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.zone-coords {
+    font-size: 11px;
+    color: #9ca3af;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.zone-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Geofence Settings Card */
+.geofence-settings-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.geofence-settings-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.geofence-settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setting-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.setting-description {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+}
+/* ContactsScreen Styles */
+.contacts-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.contacts-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.contacts-subtitle {
+  font-size: 1rem;
+  color: #718096;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* Section Styles */
+.contacts-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.contacts-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contacts-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 20px 0;
+}
+
+.contacts-section-header .contacts-section-title {
+  margin: 0;
+}
+
+/* Add Contact Button */
+.add-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-contact-btn:hover {
+  background: #2c5aa0;
+}
+
+/* Contact Cards */
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  background: #ffffff;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  border-color: #cbd5e0;
+}
+
+.personal-contact-card {
+  border-left: 4px solid #3182ce;
+}
+
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 4px 0;
+}
+
+.contact-number {
+  font-size: 1rem;
+  color: #4a5568;
+  margin: 0 0 8px 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.contact-type {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-type-blue {
+  background: #bee3f8;
+  color: #2c5aa0;
+}
+
+.contact-type-red {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.contact-type-orange {
+  background: #fbb6ce;
+  color: #d69e2e;
+}
+
+.contact-type-green {
+  background: #c6f6d5;
+  color: #38a169;
+}
+
+.contact-type-purple {
+  background: #e9d8fd;
+  color: #805ad5;
+}
+
+.contact-type-personal {
+  background: #e6fffa;
+  color: #319795;
+}
+
+/* Contact Actions */
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-action-btn {
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #4a5568;
+  transition: all 0.2s ease;
+}
+
+.contact-action-btn:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+  color: #2d3748;
+}
+
+.contact-delete-btn:hover {
+  background: #fed7d7;
+  border-color: #fc8181;
+  color: #c53030;
+}
+
+/* Call Button */
+.call-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.call-btn:hover {
+  background: #38a169;
+}
+
+.call-btn-text {
+  font-weight: 500;
+}
+
+/* Contact Form */
+.contact-form-card {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.contact-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-form-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.contact-form-close {
+  padding: 6px;
+  background: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #4a5568;
+  transition: all 0.2s ease;
+}
+
+.contact-form-close:hover {
+  background: #e2e8f0;
+  color: #2d3748;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.form-input,
+.form-select {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.form-input::placeholder {
+  color: #a0aec0;
+}
+
+.save-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 4px;
+}
+
+.save-contact-btn:hover {
+  background: #2c5aa0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contacts-screen {
+    padding: 16px;
+  }
+  
+  .contacts-title {
+    font-size: 1.75rem;
+  }
+  
+  .contacts-section {
+    padding: 20px;
+  }
+  
+  .contacts-section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .contact-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .contact-actions {
+    justify-content: space-between;
+  }
+  
+  .call-btn {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .contact-form {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacts-screen {
+    padding: 12px;
+  }
+  
+  .contacts-section {
+    padding: 16px;
+  }
+  
+  .contact-card {
+    padding: 12px;
+  }
+  /* Geofence Alert Styles */
+.geofence-alert {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: slideInDown 0.4s ease-out;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.geofence-alert.geofence-safe {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.95), rgba(74, 222, 128, 0.95));
+    color: white;
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.geofence-alert.geofence-buffer {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(245, 158, 11, 0.95));
+    color: white;
+    border-color: rgba(251, 191, 36, 0.5);
+}
+
+.geofence-alert.geofence-caution {
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.95), rgba(234, 88, 12, 0.95));
+    color: white;
+    border-color: rgba(251, 146, 60, 0.5);
+}
+
+.geofence-alert.geofence-danger {
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.95), rgba(220, 38, 38, 0.95));
+    color: white;
+    border-color: rgba(248, 113, 113, 0.5);
+    animation: slideInDown 0.4s ease-out, alertPulse 2s infinite;
+}
+
+.geofence-alert-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.geofence-alert-icon {
+    font-size: 28px;
+    width: 40px;
+    text-align: center;
+    animation: bounce 2s infinite;
+}
+
+.geofence-alert-text {
+    flex: 1;
+}
+
+.geofence-alert-message {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.geofence-alert-time {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.geofence-alert-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.geofence-alert-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Alert Animations */
+@keyframes slideInDown {
+    from {
+        transform: translate3d(0, -100%, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes alertPulse {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 12px 40px rgba(220, 38, 38, 0.4);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Responsive Design for New Screens */
+@media (max-width: 480px) {
+    .geofence-alert {
+        top: 70px;
+        left: 16px;
+        right: 16px;
+        padding: 16px;
+    }
+    
+    .geofence-alert-icon {
+        font-size: 24px;
+        width: 32px;
+    }
+    
+    .geofence-alert-message {
+        font-size: 14px;
+    }
+    
+    .geofence-alert-time {
+        font-size: 11px;
+    }
+    
+    .geofence-status-details {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .zone-categories {
+        gap: 16px;
+    }
+    
+    .zone-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .settings-title {
+        font-size: 24px;
+    }
+    
+    .geofencing-title {
+        font-size: 24px;
+    }
+}
+  
+  .contact-name {
+    font-size: 1rem;
+  }
+  
+  .contact-number {
+    font-size: 0.9rem;
+  }
+}
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.toggle-switch-on {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+.toggle-switch-off {
+    background: linear-gradient(135deg, #d1d5db, #9ca3af);
+    box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2);
+}
+
+.toggle-switch-handle {
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch-handle-off {
+    left: 2px;
+}
+
+.toggle-switch-handle-on {
+    left: 26px;
+}
+
+/* Geofence Activity Card */
+.geofence-activity-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.geofence-activity-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1f2937;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.activity-icon {
+    font-size: 24px;
+    width: 40px;
+    text-align: center;
+}
+
+.activity-info {
+    flex: 1;
+}
+
+.activity-message {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.activity-time {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* Settings Screen Styles */
+.settings-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.settings-title {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.settings-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.settings-section {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Account Options */
+.account-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.account-option {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.account-option:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.account-option-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Sign Out Button */
+.signout-btn {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.signout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+}
+
+/* Responsive Design for New Screens */
+@media (max-width: 480px) {
+    .geofence-status-details {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .zone-categories {
+        gap: 16px;
+    }
+    
+    .zone-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .settings-title {
+        font-size: 24px;
+    }
+    
+    .geofencing-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 360px) {
+    .geofence-status-card,
+    .geofence-zones-card,
+    .geofence-settings-card,
+    .geofence-activity-card,
+    .settings-section {
+        padding: 16px;
+    }
+    
+    .geofencing-title,
+    .settings-title {
+        font-size: 22px;
+    }
+    
+    .geofence-zones-title,
+    .geofence-settings-title,
+    .geofence-activity-title,
+    .settings-section-title {
+        font-size: 16px;
+    }
+}

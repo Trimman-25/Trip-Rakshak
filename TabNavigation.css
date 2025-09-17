@@ -1,0 +1,431 @@
+/* TabNavigation.css - Updated for React Component */
+.tab-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  padding: 12px 20px 25px;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tab-icon {
+  font-size: 18px;
+  margin-bottom: 4px;
+  display: block;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  opacity: 0.8;
+}
+.tab-navigation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 2px;
+}
+
+.tab-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  margin-right: 20px;
+  max-width: 320px;
+}
+
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  min-width: 65px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.tab-button:hover::before {
+  opacity: 1;
+}
+
+.tab-button.active {
+  color: #fbbf24;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.tab-button.active::before {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
+  animation: activeIndicator 2s ease-in-out infinite;
+}
+
+.tab-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+  display: block;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.tab-button:hover .tab-icon {
+  transform: scale(1.1);
+}
+
+.tab-button.active .tab-icon {
+  transform: scale(1.05);
+}
+
+.tab-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.9;
+}
+
+/* SOS Emergency Button */
+.sos-button {
+  width: 75px;
+  height: 75px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  position: relative;
+  margin: 0 15px;
+  box-shadow: 
+    0 8px 32px rgba(239, 68, 68, 0.4),
+    inset 0 2px 8px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  backdrop-filter: blur(10px);
+}
+
+.sos-button:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 12px 40px rgba(239, 68, 68, 0.6),
+    inset 0 2px 8px rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sos-button:active {
+  transform: scale(0.95);
+}
+
+.sos-pulse {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 3px solid rgba(239, 68, 68, 0.6);
+  animation: sosPulse 2.5s infinite ease-in-out;
+}
+
+.sos-pulse::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: sosPulse 2.5s infinite ease-in-out 0.5s;
+}
+
+.sos-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* About Us Button */
+.about-button {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #64748b;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 4px rgba(255, 255, 255, 0.1);
+  margin-left: 10px;
+  position: relative;
+}
+
+.about-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.about-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #f1f5f9;
+  transform: scale(1.15);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.2),
+    inset 0 2px 8px rgba(255, 255, 255, 0.15);
+}
+
+.about-button:hover::before {
+  opacity: 1;
+}
+
+.about-button:active {
+  transform: scale(0.95);
+}
+
+.about-icon {
+  font-size: 22px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.about-button:hover .about-icon {
+  transform: rotate(15deg);
+}
+/* TabNavigation.css */
+
+.tab-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 8px 12px 12px 12px;
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Animations */
+@keyframes sosPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes activeIndicator {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .tab-navigation {
+    padding: 10px 16px 20px;
+  }
+  
+  .tab-container {
+    margin-right: 16px;
+    gap: 6px;
+  }
+  
+  .tab-button {
+    min-width: 58px;
+    padding: 10px 6px;
+  }
+  
+  .tab-icon {
+    font-size: 20px;
+  }
+  
+  .tab-label {
+    font-size: 9px;
+  }
+  
+  .sos-button {
+    width: 65px;
+    height: 65px;
+    font-size: 14px;
+    margin: 0 12px;
+  }
+  
+  .about-button {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .tab-navigation {
+    padding: 8px 12px 18px;
+  }
+  
+  .tab-container {
+    gap: 4px;
+    margin-right: 12px;
+  }
+  
+  .tab-button {
+    min-width: 50px;
+    padding: 8px 4px;
+    border-radius: 12px;
+  }
+  
+  .tab-icon {
+    font-size: 18px;
+  }
+  
+  .tab-label {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+  
+  .sos-button {
+    width: 60px;
+    height: 60px;
+    font-size: 13px;
+    margin: 0 10px;
+  }
+  
+  .about-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 6px;
+  }
+}
+
+/* Dark theme enhancements */
+@media (prefers-color-scheme: dark) {
+  .tab-navigation {
+    background: linear-gradient(145deg, #0f0f23, #1a1a2e);
+    border-top-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Focus states for accessibility */
+.tab-button:focus,
+.sos-button:focus,
+.about-button:focus {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .tab-button,
+  .sos-button,
+  .about-button,
+  .tab-icon,
+  .about-icon {
+    transition: none;
+  }
+    
+  .sos-pulse,
+  .sos-pulse::before {
+    animation: none;
+  }
+  
+  @keyframes activeIndicator {
+    0%, 100% {
+      opacity: 1;
+    }
+  }
+}
